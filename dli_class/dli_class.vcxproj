@@ -147,9 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="dli_student.h" />
     <ClInclude Include="std_list_student.h" />
     <ClInclude Include="sli_student.h" />
