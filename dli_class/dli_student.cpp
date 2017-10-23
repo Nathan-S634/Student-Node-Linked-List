@@ -151,9 +151,7 @@ void studentList::reverse() {
 	}
 }
 void studentList::display() {
-	for (dstudentNode* n : worker_) {
-		std::cout << n;
-	}
+	std::cout << *this;
 }
 
 void studentList::display_reverse() {
@@ -259,10 +257,9 @@ double studentList::gpa_average(dstudentNode * node){
 std::ostream& operator<<(std::ostream& os, const studentList& sl) {
 	dstudentNode* p = sl.head_;
 	double average = 0;
-	while (p != nullptr) {
+	for (dstudentNode * p: sl.worker_) {
 		os << *p << std::endl;
 		average = average + (p->st_.gpa());
-		p = p->next_;
 	}
 	os << "{"<<"average gpa="<<(average/sl.size_)<<", size="<<sl.size_<<"}"<<std::endl;
 	return os;
