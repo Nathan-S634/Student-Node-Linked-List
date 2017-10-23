@@ -47,7 +47,7 @@ public:
 	void rotateright(size_t n);
 	void rotateleft(size_t n);
 	void deleteList();
-	double gpa_average(dstudentNode* node);
+	double gpa_average() const; //done
 	
 	static void test();
 	static void test_link_worker();

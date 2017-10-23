@@ -86,30 +86,7 @@ void studentList::append(student & st) {
 	append(new dstudentNode(st));
 }
 void studentList::deleteAt(size_t index) {
-	if (size_ == 0) {//nothing to delete
-		return;
-	}
-	else if (index >= size_) {//index out of range
-		return;
-	}
-	else if ((*this)[index] == tail_) { //select back of list to delete
-		dstudentNode* back = pop_back();
-		delete back;
-	}
-	else if ((*this)[index] == head_) {//select front of list to delete
-		dstudentNode* front = pop_front();
-		delete front;
-	}
-	else { //selecting something in the middle of the list
-		dstudentNode* select = (*this)[index];
-		dstudentNode* select_next = (*this)[index + 1];
-		dstudentNode* select_prev = ((index > 0) ? (*this)[index - 1] : nullptr);
-
-		select_prev->next_ = select_next;
-		select_next->prev_ = select_prev;
-		--size_;
-		delete select;
-	}
+worker_.remove()
 
 }
 void studentList::insertAt(size_t index, dstudentNode* node) {//needs complete recode
@@ -242,26 +219,19 @@ void studentList::deleteList() {
 	head_ = nullptr;
 	tail_ = nullptr;
 }
-double studentList::gpa_average(dstudentNode * node){
-	if (node == nullptr) {
-		return 1;
+double studentList::gpa_average() const{
+	double average = 0;
+	for (dstudentNode *p : worker_) {
+		average = average + p->st_.gpa();
 	}
-	else if (node == head_) {
-		 return ((node->st_.gpa() + gpa_average(node->next_))/size_);
-	}
-	else {
-		return ((node->st_.gpa()) + gpa_average(node->next_));
-	}
+	return (average/worker_.size());
 }
 
 std::ostream& operator<<(std::ostream& os, const studentList& sl) {
-	dstudentNode* p = sl.head_;
-	double average = 0;
-	for (dstudentNode * p: sl.worker_) {
+	for (dstudentNode * p : sl.worker_) {
 		os << *p << std::endl;
-		average = average + (p->st_.gpa());
 	}
-	os << "{"<<"average gpa="<<(average/sl.size_)<<", size="<<sl.size_<<"}"<<std::endl;
+	os << "{"<<"average gpa="<<sl.gpa_average()<<", size="<<sl.size_<<"}"<<std::endl;
 	return os;
 }
 void convert_sli() {
