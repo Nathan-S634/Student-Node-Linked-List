@@ -150,7 +150,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dli_student.h" />
+    <ClInclude Include="std_list_student.h" />
     <ClInclude Include="sli_student.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="student.h" />
@@ -158,7 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dliclass.cpp" />
-    <ClCompile Include="dli_student.cpp" />
+    <ClCompile Include="std_list_student.cpp" />
     <ClCompile Include="sli_student.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="student.cpp" />

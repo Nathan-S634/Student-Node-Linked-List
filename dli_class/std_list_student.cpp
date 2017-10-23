@@ -1,6 +1,6 @@
 
 
-#include "dli_student.h"
+#include "std_list_student.h"
 
 dstudentNode::dstudentNode(const student & st, dstudentNode * next, dstudentNode * prev) :
 	st_(st), next_(next), prev_(prev) {}

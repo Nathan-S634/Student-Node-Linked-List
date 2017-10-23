@@ -1,7 +1,7 @@
 // dliclass.cpp : Defines the entry point for the console application.
 //
 
-#include "dli_student.h"
+#include "std_list_student.h"
 
 
 

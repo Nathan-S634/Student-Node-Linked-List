@@ -1,6 +1,6 @@
 #pragma once
-#ifndef dli_student_h
-#define dli_student_h
+#ifndef std_list_student_h
+#define std_list_student_h
 
 
 #include <iostream>
@@ -60,4 +60,4 @@ private:
 	std::list<dstudentNode *> worker_;
 };
 
-#endif // !dli_student_h
+#endif // !std_list_student_h
