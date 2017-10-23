@@ -48,6 +48,7 @@ public:
 	void deleteList();
 	double gpa_average(dstudentNode* node);
 	
+	//test
 	static void test();
 
 	friend std::ostream& operator<<(std::ostream& os, const studentList& sl);
