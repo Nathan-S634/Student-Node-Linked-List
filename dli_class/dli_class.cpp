@@ -1,13 +1,13 @@
 // dliclass.cpp : Defines the entry point for the console application.
 //
 
+#include "std_list.h"
 
-#include "dli_student.h"
-#include "std_list_student.h"
+
 
 int main()
 {
-	std_list_Student::test();
 	studentList::test();
+	studentList::test_link_worker();
 	return 0;
 }
