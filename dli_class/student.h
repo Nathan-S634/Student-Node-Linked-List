@@ -9,7 +9,7 @@ class student {
 public:
 	student();
 	student(const std::string& lname, const std::string& fname, double gpa, size_t cwid);
-	std::string fname()const ;
+	std::string fname()const;
 	std::string lname()const;
 	double gpa() const;
 	int cwid() const;

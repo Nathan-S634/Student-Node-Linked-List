@@ -2,15 +2,12 @@
 #ifndef dli_student_h
 #define dli_student_h
 
-
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <fstream>
 #include "student.h"
 #include "sli_student.h"
-
-
 
 class studentList {
 public:
@@ -39,7 +36,7 @@ public:
 	void rotateleft(size_t n);
 	void deleteList();
 	double gpa_average(dstudentNode* node);
-	
+
 	//test
 	static void test();
 

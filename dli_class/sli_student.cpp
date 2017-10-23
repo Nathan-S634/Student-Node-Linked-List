@@ -1,6 +1,6 @@
 #include "sli_student.h"
 
-sli_studentNode::sli_studentNode(const std::string& lname, const std::string& fname, double gpa, int cwid, sli_studentNode* next ) :
+sli_studentNode::sli_studentNode(const std::string& lname, const std::string& fname, double gpa, int cwid, sli_studentNode* next) :
 	st_(lname, fname, gpa, cwid), next_(next) {}
 sli_studentNode::sli_studentNode(const student& st, sli_studentNode *next) :
 	st_(st), next_(next) {}

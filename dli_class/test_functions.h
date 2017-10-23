@@ -4,5 +4,4 @@
 #include <string.h>
 #include <iostream>
 
-
 #endif // !test_functions_h

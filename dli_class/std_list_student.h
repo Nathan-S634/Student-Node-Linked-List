@@ -2,7 +2,6 @@
 #ifndef std_list_student_h
 #define std_list_student_h
 
-
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -10,9 +9,6 @@
 #include "student.h"
 #include <list>
 #include "sli_student.h"
-
-
-
 
 class std_list_Student {
 public:
@@ -40,12 +36,9 @@ public:
 	void rotateleft(size_t n);
 	void deleteList();
 	double gpa_average() const; //done
-	
+
 	static void test();
 	static void test_link_worker();
-	
-	
-	
 
 	friend std::ostream& operator<<(std::ostream& os, const std_list_Student& sl);
 

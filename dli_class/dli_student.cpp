@@ -1,7 +1,4 @@
-
-
 #include "dli_student.h"
-
 
 studentList::studentList() : size_(0), head_(nullptr), tail_(nullptr) {}
 studentList::studentList(sli_studentList& sli) {
@@ -125,7 +122,6 @@ void studentList::deleteAt(size_t index) {
 		--size_;
 		delete select;
 	}
-
 }
 void studentList::insertAt(size_t index, dstudentNode* node) {//needs complete recode
 	if (size_ == 0 || index == 0) { //seelcted front of list
@@ -257,12 +253,12 @@ void studentList::deleteList() {
 	head_ = nullptr;
 	tail_ = nullptr;
 }
-double studentList::gpa_average(dstudentNode * node){
+double studentList::gpa_average(dstudentNode * node) {
 	if (node == nullptr) {
 		return 1;
 	}
 	else if (node == head_) {
-		 return ((node->st_.gpa() + gpa_average(node->next_))/size_);
+		return ((node->st_.gpa() + gpa_average(node->next_)) / size_);
 	}
 	else {
 		return ((node->st_.gpa()) + gpa_average(node->next_));
@@ -466,4 +462,3 @@ void studentList::test() {
 	test_insert_delete();
 	refactor_test();
 }
-

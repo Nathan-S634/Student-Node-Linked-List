@@ -1,7 +1,4 @@
-
-
 #include "std_list_student.h"
-
 
 std_list_Student::std_list_Student() {}
 std_list_Student::std_list_Student(sli_studentList& sli) {
@@ -45,7 +42,6 @@ void std_list_Student::save_file(std::string filename) {
 		std::cout << "Unable to open file\n";
 	}
 }
-
 
 void std_list_Student::prepend(dstudentNode* node) {
 	worker_.push_front(node);
@@ -91,8 +87,8 @@ void std_list_Student::display() {
 
 void std_list_Student::display_reverse() {
 	for (auto i = worker_.crbegin(); i != worker_.crend(); ++i) {
-			std::cout << **i <<"\n";
-		}
+		std::cout << **i << "\n";
+	}
 }
 dstudentNode* std_list_Student::front()const {
 	return (worker_.front());
@@ -110,7 +106,7 @@ void std_list_Student::rotateleft(size_t n) {
 	prepend(back());
 	pop_back();
 }
-void std_list_Student::rotateright(size_t n){
+void std_list_Student::rotateright(size_t n) {
 	append(front());
 	pop_front();
 }
@@ -118,19 +114,19 @@ void std_list_Student::rotateright(size_t n){
 void std_list_Student::deleteList() {
 	worker_.empty();
 }
-double std_list_Student::gpa_average() const{
+double std_list_Student::gpa_average() const {
 	double average = 0;
 	for (dstudentNode *p : worker_) {
 		average = average + p->st_.gpa();
 	}
-	return (average/worker_.size());
+	return (average / worker_.size());
 }
 
 std::ostream& operator<<(std::ostream& os, const std_list_Student& sl) {
 	for (dstudentNode * p : sl.worker_) {
 		os << *p << std::endl;
 	}
-	os << "{"<<"average gpa="<<sl.gpa_average()<<", size="<<sl.size()<<"}"<<std::endl;
+	os << "{" << "average gpa=" << sl.gpa_average() << ", size=" << sl.size() << "}" << std::endl;
 	return os;
 }
 void std_convert_sli() {
@@ -319,8 +315,3 @@ void std_list_Student::test() {
 	std_test_insert_delete();
 	std_refactor_test();
 }
-
-
-
-
-
