@@ -10,7 +10,7 @@ dstudentNode::dstudentNode(const student & st, dstudentNode * next, dstudentNode
  std::ostream& operator<<(std::ostream& os, const dstudentNode& node) {
 	 return os << node.prev_ << "<-prev" << "(" << &node << ")" << node.st_ << "next->" << node.next_;
  }
-studentList::studentList() : size_(0), head_(nullptr), tail_(nullptr) {}
+studentList::studentList() {}
 studentList::studentList(sli_studentList& sli) {
 	//append all elements in sli list
 	sli_studentNode* p = sli.head_;
@@ -35,14 +35,16 @@ studentList::studentList(std::string filename) {
 	}
 	file1.close();
 }
+size_t studentList::size() const
+{
+	return worker_.size();
+}
 void studentList::save_file(std::string filename) {
 	std::ofstream file1(filename);
 	if (file1.is_open()) {
-		dstudentNode *p = head_;
 		char *token = ",=";
-		while (p != nullptr) {
-			file1 << p->st_.lname() << token << p->st_.fname() << token << p->st_.gpa() << token << p->st_.cwid() << std::endl;;
-			p = p->next_;
+		for (dstudentNode * p : worker_) {
+			file1 << p->st_.lname() << token << p->st_.fname() << token << p->st_.gpa() << token << p->st_.cwid() << std::endl;
 		}
 		file1.close();
 	}
@@ -50,26 +52,8 @@ void studentList::save_file(std::string filename) {
 		std::cout << "Unable to open file\n";
 	}
 }
-dstudentNode* studentList::operator [] (int i) {
-	if (i >= size_) {
-		return nullptr;
-	}
-	else {
-		int start = 0;
-		dstudentNode* p = head_;
-		while (start < i) {
-			p = p->next_;
-			++start;
-		}
-		return p;
-	}
-}
-void studentList::print(int index) {
-	dstudentNode* p = (*this)[index];
-	if (p != nullptr) {
-		std::cout << *p;
-	}
-}
+
+
 void studentList::prepend(dstudentNode* node) {
 	worker_.push_front(node);
 }
@@ -86,138 +70,60 @@ void studentList::append(student & st) {
 	append(new dstudentNode(st));
 }
 void studentList::deleteAt(size_t index) {
-worker_.remove()
-
-}
-void studentList::insertAt(size_t index, dstudentNode* node) {//needs complete recode
-	if (size_ == 0 || index == 0) { //seelcted front of list
-		prepend(node);
-		return;
+	auto it = worker_.begin();
+	if (index < worker_.size()) {
+		std::advance(it, index);
+		worker_.erase(it);
 	}
-	else if (index >= size_)//select index greater than list so append
-	{
+}
+void studentList::insertAt(size_t index, dstudentNode* node) {
+	auto it = worker_.begin();
+	if (index >= worker_.size()) {
 		append(node);
-		return;
 	}
 	else {
-		dstudentNode* select = (*this)[index - 1]; // index in is at least one
-		dstudentNode* temp = select->next_;
-		select->next_ = node;
-		temp->prev_ = node;
-		node->prev_ = select;
-		node->next_ = temp;
-		++size_;
+		std::advance(it, index);
+		worker_.insert(it, node);
 	}
 }
 void studentList::insertAt(size_t index, const std::string & lname, const std::string & fname, double gpa, int cwid) {
 	insertAt(index, new dstudentNode(lname, fname, gpa, cwid, nullptr, nullptr));
 }
 void studentList::reverse() {
-	dstudentNode* temp_sw = nullptr;
-	dstudentNode* temp = nullptr;
-	dstudentNode* select = head_;
-	tail_ = head_;
-	while (select != nullptr) {
-		temp = select->next_;
-		temp_sw = select->prev_;
-		select->prev_ = select->next_;
-		select->next_ = temp_sw;
-		head_ = select;
-
-		select = temp;
-	}
+	worker_.reverse();
 }
 void studentList::display() {
 	std::cout << *this;
 }
 
 void studentList::display_reverse() {
-	dstudentNode* p = tail_;
-	while (p != nullptr) {
-		std::cout << *p << std::endl;
-		p = p->prev_;
-	}
+	for (auto i = worker_.crbegin(); i != worker_.crend(); ++i) {
+			std::cout << **i <<"\n";
+		}
 }
-dstudentNode* studentList::pop_front() {
-	if (size_ == 0) {
-		return nullptr;
-	}
-	else if (size_ == 1) {
-		dstudentNode* p = head_;
-		head_ = nullptr;
-		tail_ = nullptr;
-		p->next_ = nullptr;
-		p->prev_ = nullptr;
-		--size_;
-		return p;
-	}
-	else {
-		dstudentNode* p = head_;
-		head_ = head_->next_;
-		head_->prev_ = nullptr;
-
-		p->next_ = nullptr;
-		p->prev_ = nullptr;
-		--size_;
-		return p;
-	}
+dstudentNode* studentList::front()const {
+	return (worker_.front());
 }
-dstudentNode* studentList::pop_back() {
-	if (size_ == 0) {
-		return nullptr;
-	}
-	else if (size_ == 1) {
-		dstudentNode* p = tail_;
-		head_ = nullptr;
-		tail_ = nullptr;
-		p->next_ = nullptr;
-		p->prev_ = nullptr;
-		--size_;
-		return p;
-	}
-	else {
-		dstudentNode* p = tail_;
-		tail_ = tail_->prev_;
-		tail_->next_ = nullptr;
-
-		p->next_ = nullptr;
-		p->prev_ = nullptr;
-		--size_;
-		return p;
-	}
+dstudentNode* studentList::back()const {
+	return (worker_.back());
+}
+void studentList::pop_front() {
+	worker_.pop_front();
+}
+void studentList::pop_back() {
+	worker_.pop_back();
 }
 void studentList::rotateleft(size_t n) {
-	int i = 0;
-	while (i++ < n) {
-		dstudentNode* p = pop_front();
-		if (p != nullptr) {
-			append(p);
-		}
-	}
+	prepend(back());
+	pop_back();
 }
-void studentList::rotateright(size_t n)
-{
-	int i = 0;
-	while (i++ < n) {
-		dstudentNode* p = pop_back();
-		if (p != nullptr) {
-			prepend(p);
-		}
-	}
+void studentList::rotateright(size_t n){
+	append(front());
+	pop_front();
 }
 
 void studentList::deleteList() {
-	if (size_ == 0) {
-		return;
-	}
-	dstudentNode *p = (*this)[0];
-	while (p != nullptr) {
-		dstudentNode* temp = p;
-		p = p->next_;
-		delete temp;
-	}
-	head_ = nullptr;
-	tail_ = nullptr;
+	worker_.empty();
 }
 double studentList::gpa_average() const{
 	double average = 0;
@@ -231,7 +137,7 @@ std::ostream& operator<<(std::ostream& os, const studentList& sl) {
 	for (dstudentNode * p : sl.worker_) {
 		os << *p << std::endl;
 	}
-	os << "{"<<"average gpa="<<sl.gpa_average()<<", size="<<sl.size_<<"}"<<std::endl;
+	os << "{"<<"average gpa="<<sl.gpa_average()<<", size="<<sl.size()<<"}"<<std::endl;
 	return os;
 }
 void convert_sli() {
@@ -425,9 +331,16 @@ void studentList::test_link_worker()
 {
 	studentList dli;
 	dli.append("last1", "first1", 3.23, 5344);
-	dli.append("last1", "first1", 3.23, 5344);
-	dli.append("last1", "first1", 3.23, 5344);
+	dli.append("last2", "first1", 3.23, 5344);
+	dli.append("last3", "first1", 3.23, 5344);
+	dli.insertAt(5,"insert1", "first1", 3.23, 5344);
+	dli.deleteAt(2);
 	dli.display();
+	dli.reverse();
+	dli.display();
+	dli.rotateright(1);
+	dli.display();
+	dli.display_reverse();
 }
 
 

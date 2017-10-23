@@ -27,10 +27,9 @@ public:
 	studentList(sli_studentList& sli);
 	studentList(std::string filename);
 	size_t size() const;
-	dstudentNode* head() const;
+	dstudentNode* front() const;
+	dstudentNode* back() const;
 	void save_file(std::string filename);
-	dstudentNode* operator [] (int i);
-	void print(int index);
 	void prepend(dstudentNode* node);//done
 	void prepend(std::string lname, std::string fname, double gpa, int cwid);//done
 	void append(dstudentNode* node);//done
@@ -42,8 +41,8 @@ public:
 	void reverse();
 	void display();
 	void display_reverse();
-	dstudentNode* pop_front();
-	dstudentNode* pop_back();
+	void pop_front();
+	void pop_back();
 	void rotateright(size_t n);
 	void rotateleft(size_t n);
 	void deleteList();
@@ -58,9 +57,6 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const studentList& sl);
 
 private:
-	size_t size_;
-	dstudentNode * head_;
-	dstudentNode * tail_;
 	std::list<dstudentNode *> worker_;
 };
 
