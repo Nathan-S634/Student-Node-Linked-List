@@ -10,8 +10,8 @@ dstudentNode::dstudentNode(const student & st, dstudentNode * next, dstudentNode
  std::ostream& operator<<(std::ostream& os, const dstudentNode& node) {
 	 return os << node.prev_ << "<-prev" << "(" << &node << ")" << node.st_ << "next->" << node.next_;
  }
-studentList::studentList() {}
-studentList::studentList(sli_studentList& sli) {
+std_list_Student::std_list_Student() {}
+std_list_Student::std_list_Student(sli_studentList& sli) {
 	//append all elements in sli list
 	sli_studentNode* p = sli.head_;
 	while (p != nullptr) {
@@ -20,7 +20,7 @@ studentList::studentList(sli_studentList& sli) {
 		p = p->next_;
 	}
 }
-studentList::studentList(std::string filename) {
+std_list_Student::std_list_Student(std::string filename) {
 	std::ifstream file1(filename);
 	std::string line;
 	const char *token_s = ",=";
@@ -35,11 +35,11 @@ studentList::studentList(std::string filename) {
 	}
 	file1.close();
 }
-size_t studentList::size() const
+size_t std_list_Student::size() const
 {
 	return worker_.size();
 }
-void studentList::save_file(std::string filename) {
+void std_list_Student::save_file(std::string filename) {
 	std::ofstream file1(filename);
 	if (file1.is_open()) {
 		char *token = ",=";
@@ -54,29 +54,29 @@ void studentList::save_file(std::string filename) {
 }
 
 
-void studentList::prepend(dstudentNode* node) {
+void std_list_Student::prepend(dstudentNode* node) {
 	worker_.push_front(node);
 }
-void studentList::prepend(std::string lname, std::string fname, double gpa, int cwid) {
+void std_list_Student::prepend(std::string lname, std::string fname, double gpa, int cwid) {
 	prepend(new dstudentNode(lname, fname, gpa, cwid));
 }
-void studentList::append(dstudentNode* node) {
+void std_list_Student::append(dstudentNode* node) {
 	worker_.push_back(node);
 }
-void studentList::append(std::string lname, std::string fname, double gpa, int cwid) {
+void std_list_Student::append(std::string lname, std::string fname, double gpa, int cwid) {
 	append(new dstudentNode(lname, fname, gpa, cwid));
 }
-void studentList::append(student & st) {
+void std_list_Student::append(student & st) {
 	append(new dstudentNode(st));
 }
-void studentList::deleteAt(size_t index) {
+void std_list_Student::deleteAt(size_t index) {
 	auto it = worker_.begin();
 	if (index < worker_.size()) {
 		std::advance(it, index);
 		worker_.erase(it);
 	}
 }
-void studentList::insertAt(size_t index, dstudentNode* node) {
+void std_list_Student::insertAt(size_t index, dstudentNode* node) {
 	auto it = worker_.begin();
 	if (index >= worker_.size()) {
 		append(node);
@@ -86,46 +86,46 @@ void studentList::insertAt(size_t index, dstudentNode* node) {
 		worker_.insert(it, node);
 	}
 }
-void studentList::insertAt(size_t index, const std::string & lname, const std::string & fname, double gpa, int cwid) {
+void std_list_Student::insertAt(size_t index, const std::string & lname, const std::string & fname, double gpa, int cwid) {
 	insertAt(index, new dstudentNode(lname, fname, gpa, cwid, nullptr, nullptr));
 }
-void studentList::reverse() {
+void std_list_Student::reverse() {
 	worker_.reverse();
 }
-void studentList::display() {
+void std_list_Student::display() {
 	std::cout << *this;
 }
 
-void studentList::display_reverse() {
+void std_list_Student::display_reverse() {
 	for (auto i = worker_.crbegin(); i != worker_.crend(); ++i) {
 			std::cout << **i <<"\n";
 		}
 }
-dstudentNode* studentList::front()const {
+dstudentNode* std_list_Student::front()const {
 	return (worker_.front());
 }
-dstudentNode* studentList::back()const {
+dstudentNode* std_list_Student::back()const {
 	return (worker_.back());
 }
-void studentList::pop_front() {
+void std_list_Student::pop_front() {
 	worker_.pop_front();
 }
-void studentList::pop_back() {
+void std_list_Student::pop_back() {
 	worker_.pop_back();
 }
-void studentList::rotateleft(size_t n) {
+void std_list_Student::rotateleft(size_t n) {
 	prepend(back());
 	pop_back();
 }
-void studentList::rotateright(size_t n){
+void std_list_Student::rotateright(size_t n){
 	append(front());
 	pop_front();
 }
 
-void studentList::deleteList() {
+void std_list_Student::deleteList() {
 	worker_.empty();
 }
-double studentList::gpa_average() const{
+double std_list_Student::gpa_average() const{
 	double average = 0;
 	for (dstudentNode *p : worker_) {
 		average = average + p->st_.gpa();
@@ -133,7 +133,7 @@ double studentList::gpa_average() const{
 	return (average/worker_.size());
 }
 
-std::ostream& operator<<(std::ostream& os, const studentList& sl) {
+std::ostream& operator<<(std::ostream& os, const std_list_Student& sl) {
 	for (dstudentNode * p : sl.worker_) {
 		os << *p << std::endl;
 	}
@@ -161,13 +161,13 @@ void convert_sli() {
 	sli_display(sli); // display the students in the list
 
 	std::cout << "converting to double linked list ====================================\n";
-	studentList dli_fromsli(sli);
+	std_list_Student dli_fromsli(sli);
 	std::cout << dli_fromsli;
 	dli_fromsli.display_reverse();
 	std::cout << "\nend single to double link test\n";
 }
 void test_append() {
-	studentList a;
+	std_list_Student a;
 	/*for (int i = 0; i < 25; ++i)*/
 	//{
 	//	a.prepend("last1", "first1", 4.2, 1234);
@@ -182,7 +182,7 @@ void test_append() {
 	std::cout << a;
 	a.rotateleft(1);
 	std::cout << a;
-	studentList b("testing.txt");
+	std_list_Student b("testing.txt");
 	std::cout << b;
 	//a.display_reverse();
 }
@@ -198,7 +198,7 @@ void test_for_lab_5() {
 	std::cout << "anonymous is: " << anon << "\n";
 	std::cout << "al is: " << al << "\n\n";
 
-	// make new studentList, add new students and one existing
+	// make new std_list_Student, add new students and one existing
 	sli_studentList sli;
 	sli_prepend(sli, "Newton", "Isaac", 4.0, 54321);
 	sli_append(sli, "Planck", "Max", 3.9, 23451);
@@ -237,8 +237,8 @@ void test_for_lab_5() {
 
 	std::cout << "jean-luc is: " << jeanluc << "\n\n";
 
-	// make new studentList, add new students and one existing
-	studentList dli;
+	// make new std_list_Student, add new students and one existing
+	std_list_Student dli;
 	dli.prepend("Riker", "Will", 3.7, 11223);
 
 	dli.append("LaForge", "Geordie", 3.6, 51124);
@@ -270,12 +270,12 @@ void test_for_lab_5() {
 	dli.display();
 
 	std::cout << "try to convert an sli to a dli...\n";
-	studentList dli_from_sli(sli);
+	std_list_Student dli_from_sli(sli);
 	sli_display(sli);
 	dli_from_sli.display();
 
 	//std::cout << "try to convert an sli to a dli...\n"; //will be added in a new class later
-	//studentList sli_from_dli;
+	//std_list_Student sli_from_dli;
 	//dli_toSingle(dli, sli_from_dli);
 	//dli_display(dli);
 	//sli_display(sli_from_dli);
@@ -291,7 +291,7 @@ void test_for_lab_5() {
 }
 
 void test_insert_delete() {
-	//studentList dli2;
+	//std_list_Student dli2;
 	//dli2.append("0_last", "first", 2.6, 12345);
 	//dli2.append("1_last", "first", 2.6, 12345);
 	//dli2.append("2_last", "first", 2.6, 12345);
@@ -302,7 +302,7 @@ void test_insert_delete() {
 	//dli2.display_reverse();
 	//delete &dli2;
 
-	studentList dli2;
+	std_list_Student dli2;
 	dli2.append("0_last", "first", 2.6, 12345);
 	dli2.append("1_last", "first", 2.6, 12345);
 	dli2.append("2_last", "first", 2.6, 12345);
@@ -319,7 +319,7 @@ void refactor_test() {
 	sli_display(sli);
 }
 
-void studentList::test() {
+void std_list_Student::test() {
 	convert_sli();
 	test_append();
 	test_for_lab_5();
@@ -327,9 +327,9 @@ void studentList::test() {
 	refactor_test();
 }
 
-void studentList::test_link_worker()
+void std_list_Student::test_link_worker()
 {
-	studentList dli;
+	std_list_Student dli;
 	dli.append("last1", "first1", 3.23, 5344);
 	dli.append("last2", "first1", 3.23, 5344);
 	dli.append("last3", "first1", 3.23, 5344);

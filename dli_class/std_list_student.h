@@ -21,11 +21,11 @@ struct dstudentNode {
 };
 
 
-class studentList {
+class std_list_Student {
 public:
-	studentList();
-	studentList(sli_studentList& sli);
-	studentList(std::string filename);
+	std_list_Student();
+	std_list_Student(sli_studentList& sli);
+	std_list_Student(std::string filename);
 	size_t size() const;
 	dstudentNode* front() const;
 	dstudentNode* back() const;
@@ -54,7 +54,7 @@ public:
 	
 	
 
-	friend std::ostream& operator<<(std::ostream& os, const studentList& sl);
+	friend std::ostream& operator<<(std::ostream& os, const std_list_Student& sl);
 
 private:
 	std::list<dstudentNode *> worker_;

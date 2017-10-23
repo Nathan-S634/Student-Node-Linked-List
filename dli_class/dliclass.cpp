@@ -7,7 +7,7 @@
 
 int main()
 {
-	studentList::test();
-	studentList::test_link_worker();
+	std_list_Student::test();
+	std_list_Student::test_link_worker();
 	return 0;
 }
