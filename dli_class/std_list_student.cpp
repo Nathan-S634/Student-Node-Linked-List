@@ -2,14 +2,7 @@
 
 #include "std_list_student.h"
 
-dstudentNode::dstudentNode(const student & st, dstudentNode * next, dstudentNode * prev) :
-	st_(st), next_(next), prev_(prev) {}
 
- dstudentNode::dstudentNode(const std::string& lname, const std::string& fname, double gpa, int cwid, dstudentNode* next, dstudentNode* prev) :
-	st_(lname, fname, gpa, cwid), next_(next), prev_(prev) {}
- std::ostream& operator<<(std::ostream& os, const dstudentNode& node) {
-	 return os << node.prev_ << "<-prev" << "(" << &node << ")" << node.st_ << "next->" << node.next_;
- }
 std_list_Student::std_list_Student() {}
 std_list_Student::std_list_Student(sli_studentList& sli) {
 	//append all elements in sli list
@@ -140,7 +133,7 @@ std::ostream& operator<<(std::ostream& os, const std_list_Student& sl) {
 	os << "{"<<"average gpa="<<sl.gpa_average()<<", size="<<sl.size()<<"}"<<std::endl;
 	return os;
 }
-void convert_sli() {
+void std_convert_sli() {
 	std::cout << "\n=====================================================\n";
 	std::cout << "STUDENT LIST LAB ====================================\n";
 	std::cout << "... singly-linked list\n\n";
@@ -161,12 +154,13 @@ void convert_sli() {
 	sli_display(sli); // display the students in the list
 
 	std::cout << "converting to double linked list ====================================\n";
+
 	std_list_Student dli_fromsli(sli);
 	std::cout << dli_fromsli;
 	dli_fromsli.display_reverse();
 	std::cout << "\nend single to double link test\n";
 }
-void test_append() {
+void std_test_append() {
 	std_list_Student a;
 	/*for (int i = 0; i < 25; ++i)*/
 	//{
@@ -187,7 +181,7 @@ void test_append() {
 	//a.display_reverse();
 }
 
-void test_for_lab_5() {
+void std_test_for_lab_5() {
 	std::cout << "\n================================================================\n";
 	std::cout << "STUDENT LIST LAB w/REVERSAL and ROTATION =======================\n";
 	std::cout << "... singly-linked list\n\n";
@@ -290,7 +284,7 @@ void test_for_lab_5() {
 	std::cout << "\t\t...done.\n";
 }
 
-void test_insert_delete() {
+void std_test_insert_delete() {
 	//std_list_Student dli2;
 	//dli2.append("0_last", "first", 2.6, 12345);
 	//dli2.append("1_last", "first", 2.6, 12345);
@@ -311,37 +305,22 @@ void test_insert_delete() {
 	std::cout << std::endl;
 	dli2.display_reverse();
 }
-void refactor_test() {
+void std_refactor_test() {
 	sli_studentList sli;
 	sli_prepend(sli, "Newton", "Isaac", 4.0, 54321);
 	sli_append(sli, "Planck", "Max", 3.9, 23451);
 	sli_append(sli, "Edison", "Thomas", 3.9, 34512);
 	sli_display(sli);
 }
-
 void std_list_Student::test() {
-	convert_sli();
-	test_append();
-	test_for_lab_5();
-	test_insert_delete();
-	refactor_test();
+	std_convert_sli();
+	std_test_append();
+	std_test_for_lab_5();
+	std_test_insert_delete();
+	std_refactor_test();
 }
 
-void std_list_Student::test_link_worker()
-{
-	std_list_Student dli;
-	dli.append("last1", "first1", 3.23, 5344);
-	dli.append("last2", "first1", 3.23, 5344);
-	dli.append("last3", "first1", 3.23, 5344);
-	dli.insertAt(5,"insert1", "first1", 3.23, 5344);
-	dli.deleteAt(2);
-	dli.display();
-	dli.reverse();
-	dli.display();
-	dli.rotateright(1);
-	dli.display();
-	dli.display_reverse();
-}
+
 
 
 

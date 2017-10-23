@@ -33,6 +33,12 @@
     <ClInclude Include="std_list_student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dli_student.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="std_list_student.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dli_student.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

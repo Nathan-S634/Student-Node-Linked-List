@@ -150,18 +150,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dli_student.h" />
     <ClInclude Include="std_list_student.h" />
     <ClInclude Include="sli_student.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="test_functions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dliclass.cpp" />
+    <ClCompile Include="dli_student.cpp" />
     <ClCompile Include="std_list_student.cpp" />
     <ClCompile Include="sli_student.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="test_functions.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

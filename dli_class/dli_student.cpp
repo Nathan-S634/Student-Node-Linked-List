@@ -2,14 +2,7 @@
 
 #include "dli_student.h"
 
-dstudentNode::dstudentNode(const student & st, dstudentNode * next, dstudentNode * prev) :
-	st_(st), next_(next), prev_(prev) {}
 
- dstudentNode::dstudentNode(const std::string& lname, const std::string& fname, double gpa, int cwid, dstudentNode* next, dstudentNode* prev) :
-	st_(lname, fname, gpa, cwid), next_(next), prev_(prev) {}
- std::ostream& operator<<(std::ostream& os, const dstudentNode& node) {
-	 return os << node.prev_ << "<-prev" << "(" << &node << ")" << node.st_ << "next->" << node.next_;
- }
 studentList::studentList() : size_(0), head_(nullptr), tail_(nullptr) {}
 studentList::studentList(sli_studentList& sli) {
 	//append all elements in sli list
@@ -284,7 +277,7 @@ std::ostream& operator<<(std::ostream& os, const studentList& sl) {
 		average = average + (p->st_.gpa());
 		p = p->next_;
 	}
-	os << "{"<<"average gpa="<<(average/sl.size_)<<", size="<<sl.size_<<"}"<<std::endl;
+	os << "{" << "average gpa=" << (average / sl.size_) << ", size=" << sl.size_ << "}" << std::endl;
 	return os;
 }
 void convert_sli() {
@@ -308,6 +301,7 @@ void convert_sli() {
 	sli_display(sli); // display the students in the list
 
 	std::cout << "converting to double linked list ====================================\n";
+
 	studentList dli_fromsli(sli);
 	std::cout << dli_fromsli;
 	dli_fromsli.display_reverse();
@@ -465,7 +459,6 @@ void refactor_test() {
 	sli_append(sli, "Edison", "Thomas", 3.9, 34512);
 	sli_display(sli);
 }
-
 void studentList::test() {
 	convert_sli();
 	test_append();

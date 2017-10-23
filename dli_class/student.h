@@ -21,5 +21,13 @@ private:
 	double gpa_;
 	int cwid_;
 };
+struct dstudentNode {
+	dstudentNode(const std::string& lname, const std::string& fname, double gpa, int cwid, dstudentNode* next = nullptr, dstudentNode* prev = nullptr);
+	dstudentNode(const student& st, dstudentNode *next = nullptr, dstudentNode* prev = nullptr);
+	friend std::ostream& operator<<(std::ostream& os, const dstudentNode& node);
+	student st_;
+	dstudentNode* next_;
+	dstudentNode* prev_;
+};
 
 #endif // !student_h
