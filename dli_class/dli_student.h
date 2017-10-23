@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include "student.h"
+#include <list>
 #include "sli_student.h"
 
 struct dstudentNode {
@@ -30,11 +31,11 @@ public:
 	void save_file(std::string filename);
 	dstudentNode* operator [] (int i);
 	void print(int index);
-	void prepend(dstudentNode* node);
-	void prepend(std::string lname, std::string fname, double gpa, int cwid);
-	void append(dstudentNode* node);
-	void append(std::string lname, std::string fname, double gpa, int cwid);
-	void append(student & st);
+	void prepend(dstudentNode* node);//done
+	void prepend(std::string lname, std::string fname, double gpa, int cwid);//done
+	void append(dstudentNode* node);//done
+	void append(std::string lname, std::string fname, double gpa, int cwid);//done
+	void append(student & st);//done
 	void deleteAt(size_t index);
 	void insertAt(size_t index, dstudentNode* node);
 	void insertAt(size_t index, const std::string & lname, const std::string & fname, double gpa, int cwid);
@@ -49,6 +50,10 @@ public:
 	double gpa_average(dstudentNode* node);
 	
 	static void test();
+	static void test_link_worker();
+	
+	
+	
 
 	friend std::ostream& operator<<(std::ostream& os, const studentList& sl);
 
@@ -56,6 +61,7 @@ private:
 	size_t size_;
 	dstudentNode * head_;
 	dstudentNode * tail_;
+	std::list<dstudentNode *> worker_;
 };
 
 #endif // !dli_student_h

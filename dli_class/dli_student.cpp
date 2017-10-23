@@ -71,35 +71,13 @@ void studentList::print(int index) {
 	}
 }
 void studentList::prepend(dstudentNode* node) {
-	if (size_ == 0) {
-		head_ = node;
-		tail_ = node;
-		++size_;
-	}
-	else {
-		dstudentNode *tmp = head_;
-		head_ = node;
-		node->next_ = tmp;
-		tmp->prev_ = node;
-		++size_;
-	}
+	worker_.push_front(node);
 }
 void studentList::prepend(std::string lname, std::string fname, double gpa, int cwid) {
 	prepend(new dstudentNode(lname, fname, gpa, cwid));
 }
 void studentList::append(dstudentNode* node) {
-	if (size_ == 0) {
-		prepend(node);
-		return;
-	}
-	else {
-		dstudentNode *select = (*this)[size_ - 1]; //select end of list
-		select->next_ = node;
-		tail_ = node;
-		node->prev_ = select;
-		node->next_ = nullptr;
-		++size_;
-	}
+	worker_.push_back(node);
 }
 void studentList::append(std::string lname, std::string fname, double gpa, int cwid) {
 	append(new dstudentNode(lname, fname, gpa, cwid));
@@ -173,7 +151,9 @@ void studentList::reverse() {
 	}
 }
 void studentList::display() {
-	std::cout << *this;
+	for (dstudentNode* n : worker_) {
+		std::cout << n;
+	}
 }
 
 void studentList::display_reverse() {
@@ -473,4 +453,15 @@ void studentList::test() {
 	test_insert_delete();
 	refactor_test();
 }
+
+void studentList::test_link_worker()
+{
+	studentList dli;
+	dli.append("last1", "first1", 3.23, 5344);
+	dli.append("last1", "first1", 3.23, 5344);
+	dli.append("last1", "first1", 3.23, 5344);
+	dli.display();
+}
+
+
 
